@@ -1,63 +1,65 @@
 
-## Basic examples using both npm modules
+## Implementation examples of both npm modules
 
 #### Create an Entity in the ContextBroker
 ```js
-	//Convert a JSON into NGSI entity
+	//Convert a JSON into NGSI Format
 	var entity = ngsi.parseEntity({
 		id :'Room1',
 		type:'Room',
 		temperature : {
 			value : 50 ,
 			metadata : {
-				frequency: 40,
+				frecuency: 40,
 				scale: 'Celsious'
 			}
 		},
-		dateCreated: new Date()
+		dateStamp : new Date()
 	})
-	// Send entity to ContextBroker 
+	// Send to ContextBroker 
 	cb.createEntity(entity)
 	.then((result) => console.log(result))
 	.catch((err) => console.log(err))
 ```
 
-#### Update attribute of an entity
+#### Update all the attributes of an entity
 ```js
-	//Convert a JSON Attribute into NGSI Attribute 
+	//Convert a JSON Attribute to NGSI Attribute Format
 	var attribute = ngsi.parseAttrs({
 		temperature : {
 			value : 50
 		}
 	})
-	// Update attribute in the entity stored in the ContextBroker 
+	// Send to ContextBroker 
 	cb.updateEntityAttrs('Room1', attribute)
 	.then((result) => console.log(result))
 	.catch((err) => console.log(err))
 ```
 
-#### Add an attribute to a NGSI entity.
+#### Add a JSON Attribute to a NGSI entity.
 ```js
-	//Convert a JSON Attribute into NGSI Attribute
+	//Convert a JSON Attribute to NGSI Attribute Format
 	var attribute = ngsi.parseAttrs({
 		temperature : {
 			value : 50
 		}
 	})
-	// Update the entity Room1 adding it the new attributte 
+	// Send to ContextBroker 
 	cb.addJSONAttributeToEntity('Room1', attribute)
 	.then((result) => console.log(result))
 	.catch((err) => console.log(err))
 ```
 
 
-#### Update the data of an entity attribute
+#### Update the JSON Object of an atttribute of the entity
 ```js
-	//Convert a attribute value into NGSI Attribute Value 
+	//Convert a attribute value to NGSI Attribute Value Format
 	var value = ngsi.parseValue(50)
 	
-	// Update the attribute of the entity with a new value 
-	cb.updateJSONAttrEntity('idEntity', 'nameAttribute', value)
+	// Send to ContextBroker 
+	cb.updateJSONAttrEntity(
+		'idEntity', 'nameAttribute', value
+	)
 	.then((result) => console.log(result))
 	.catch((err) => console.log(err))
 ```
